@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Test Case </title>
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/ipfs-core/dist/index.min.js"></script>
+</head>
+<body>
+    <div class="header"> Upload Test Case </div>
+
+    <br><br>
+    &nbsp 
+    <label>  Problem ID:</label>
+    <input type="text" id="problemId">
+
+    <br><br>
+    &nbsp 
+    <label>Upload file: </label>
+    <input type="file" onchange="loadFile(this.files[0])">
+
+    <br><br>
+    &nbsp 
+    <button class="btn" onclick="addTestCase()"> Submit </button>
+
+    <script src="js/addTestCase.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.9/ace.js"></script>
+
+</body>
+</html>

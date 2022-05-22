@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>uploadChecker</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/ipfs-core/dist/index.min.js"></script>
+</head>
+<body>
+    <div class="header"> uploadChecker </div>
+
+    <br><br>
+
+    <label>  Problem ID:</label>
+    <input type="text" id="problemId">
+
+    <br><br>
+
+    <div class="control-panel">
+        Select Language:
+        &nbsp; &nbsp;
+        <select id="languages" class="languages" onchange="changeLanguage()">
+            <option value="cpp"> C++ </option>
+        </select>
+    </div>
+
+    <div class="editor" id="editor"></div>
+
+    <div class="button-container">
+        <button class="btn" onclick="executeCode()"> Run </button>
+        &nbsp 
+        <button class="btn" onclick="saveCode()"> Save </button>
+    </div>
+
+    <div class="output"></div>
+    <script src="js/Ide.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.9/ace.js"></script>
+
+</body>
+</html>
