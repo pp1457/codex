@@ -29,11 +29,35 @@ function executeCode() {
         data: {
             language: $("#languages").val(),
             code: editor.getSession().getValue(),
-            file: $("#myfile").val().replace(/C:\\fakepath\\/i, '')
+            problemID: document.getElementById("problemId").value,
         },
 
-        success: function(response) {
-            $(".output").text(response)
+        success: async function(response) {
+            $(".output").text(response);
+            console.log("hello");
+        }
+    })
+}
+
+function saveCode() {
+
+    $.ajax({
+
+        url: "/app/compiler.php",
+
+        method: "POST",
+
+        data: {
+            language: $("#languages").val(),
+            code: editor.getSession().getValue(),
+            problemID: document.getElementById("problemId").value,
+        },
+
+        success: async function(response) {
+            const ipfs = await window.IpfsCore.create({repo: 'ok' + Math.random()});
+            const {cid} = await ipfs.add(editor.getSession().getValue());
+            $(".output").text(response);
+            console.log(cid);
         }
     })
 }
