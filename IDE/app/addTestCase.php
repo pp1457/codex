@@ -1,6 +1,6 @@
 <?php
     $file = $_POST['file'];
-    $problemID = (int) $_POST['problemID'];
+    $problemID = $_POST['problemID'];
 
     $random = "always";
     $filePath = "testCase/" . $problemID . "." . "txt";
