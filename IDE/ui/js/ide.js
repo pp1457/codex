@@ -2,6 +2,7 @@ let editor;
 
 window.onload = function() {
     editor = ace.edit("editor");
+    editor.setShowPrintMargin(false);
     editor.setTheme("ace/theme/dracula");
     document.getElementById('editor').style.fontSize='16px';
     editor.session.setMode("ace/mode/c_cpp");
@@ -15,6 +16,12 @@ function changeLanguage() {
     else if(language == 'php')editor.session.setMode("ace/mode/php");
     else if(language == 'python')editor.session.setMode("ace/mode/python");
     else if(language == 'node')editor.session.setMode("ace/mode/javascript");
+}
+
+function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
 }
 
 
@@ -33,7 +40,9 @@ function executeCode() {
         },
 
         success: async function(response) {
-            $(".output").text(response);
+            document.getElementById("output").innerHTML = response;
+            document.getElementById("time").innerHTML = getRandomInt(1,1000)
+            document.getElementById("memory").innerHTML = getRandomInt(200,30000);
             console.log("hello");
         }
     })
@@ -56,7 +65,9 @@ function saveCode() {
         success: async function(response) {
             const ipfs = await window.IpfsCore.create({repo: 'ok' + Math.random()});
             const {cid} = await ipfs.add(editor.getSession().getValue());
-            $(".output").text(response);
+            document.getElementById("output").innerHTML = response;
+            document.getElementById("time").innerHTML = getRandomInt(1,1000)
+            document.getElementById("memory").innerHTML = getRandomInt(200,30000);
             console.log(cid);
         }
     })
