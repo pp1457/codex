@@ -8,7 +8,7 @@
     fwrite($programFile, $code);
     fclose($programFile);
 
-    echo "AC";
+    echo "add new Checker!!!";
 
     /*
     if($language == "c") {

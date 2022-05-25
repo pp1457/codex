@@ -1,15 +1,17 @@
 <?php
-    $problemID = $_POST['problemID'];
     $title = $_POST['title'];
     $description = $_POST['description'];
     $input = $_POST['input'];
     $output = $_POST['output'];
     $scoring = $_POST['scoring'];
 
+    $pIdFile = fopen("problemCnt.txt","r");
+    $problemID=(int)fread($pIdFile,filesize("../ui/problem_id/problemTemplate.html"));
+    fclose($pIdFile);
 
     $template = fopen("../ui/problem_id/problemTemplate.html","r");
     $content=fread($template,filesize("../ui/problem_id/problemTemplate.html"));
-    $content=str_replace("{title}",$title,$content);
+    $content=str_replace("{title}",$problemID . " . " . $title,$content);
     $content=str_replace("{description}",$description,$content);
     $content=str_replace("{input}",$input,$content);
     $content=str_replace("{output}",$output,$content);
@@ -21,7 +23,7 @@
     fwrite($programFile, $content);
     fclose($programFile);
 
-    echo "AC";
+    echo "preview Problem !!!";
 
     /*
     if($language == "c") {

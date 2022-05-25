@@ -7,5 +7,5 @@
     $programFile = fopen($filePath, "w");
     fwrite($programFile, $file);
     fclose($programFile);
-    //echo "AC";
+    echo "add new Test Case!!!";
 ?>
