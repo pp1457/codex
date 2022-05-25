@@ -23,7 +23,7 @@
         $checkerExe = "tmp.exe";
         shell_exec("g++ $checkerFilePath -o $checkerExe");
         $score = shell_exec(__DIR__ . "//$checkerExe < temp/tmp.txt ");
-        echo "score : " . $score ;
+        echo  $score ;
     }
 
     /*
