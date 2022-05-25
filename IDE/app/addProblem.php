@@ -7,8 +7,8 @@
     $scoring = $_POST['scoring'];
 
 
-    $template = fopen("../ui/problemTemplate.html","r");
-    $content=fread($template,filesize("../ui/problemTemplate.html"));
+    $template = fopen("../ui/problem_id/problemTemplate.html","r");
+    $content=fread($template,filesize("../ui/problem_id/problemTemplate.html"));
     $content=str_replace("{title}",$title,$content);
     $content=str_replace("{description}",$description,$content);
     $content=str_replace("{input}",$input,$content);
