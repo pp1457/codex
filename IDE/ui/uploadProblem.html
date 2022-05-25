@@ -86,9 +86,9 @@
       </a>
 
       <ul class="nav nav-pills">
-       <li class="nav-item"><a href="index.html" class="nav-link active" aria-current="page">Home</a></li>
+       <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
         <li class="nav-item"><a href="problems.html" class="nav-link">Problems</a></li>
-        <li class="nav-item"><a href="uploadProblem.html" class="nav-link">Upload Problem</a></li>
+        <li class="nav-item"><a href="uploadProblem.html" class="nav-link  active"  aria-current="page">Upload Problem</a></li>
         <li class="nav-item"><a href="uploadChecker.html" class="nav-link">Upload Checker</a></li>
         <li class="nav-item"><a href="uploadTestCase.html" class="nav-link">Upload Test Case</a></li>
         <li class="nav-item"><a href="submit.html" class="nav-link">Submit</a></li>
@@ -99,21 +99,40 @@
 
     
     <!-- this is what a comment in html looks like -->
-    <br><br><br><br><br><br><br><br><br><br><br><br><br>
     <main>
-        <section class="py-5 text-center container">
-            <div class="row py-lg-5">
-              <div class="col-lg-6 col-md-8 mx-auto">
-                <h1 class="fw-light">Album example</h1>
-                <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
-                <p>
-                  <a href="#" class="btn btn-primary my-2">Main call to action</a>
-                  <a href="#" class="btn btn-secondary my-2">Secondary action</a>
-                </p>
-              </div>
-            </div>
-          </section>
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Title</label>
+            <input class="form-control" id="title" placeholder="Watermelon">
+          </div>
+          <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">Description</label>
+            <textarea class="form-control" id="description" rows="3" placeholder="One hot summer day Pete and his friend Billy decided to buy a watermelon..."></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">Input</label>
+            <textarea class="form-control" id="input" rows="3" placeholder="The first (and the only) input line contains integer number w (1 ≤ w ≤ 100) — the weight of the watermelon bought by the boys."></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">Output</label>
+            <textarea class="form-control" id="output" rows="3" placeholder="Print YES, if the boys can divide the watermelon into two parts, each of them weighing even number of kilos; and NO in the opposite case."></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">Scoring</label>
+            <textarea class="form-control" id="scoring" rows="3" placeholder="If your answer is correct , your score will be 100. Otherwise you will get 0."></textarea>
+          </div>
       </main>
+      <br>
+      <div>
     
+        <a href="problem_id/problem_preview.html" class="btn btn-outline-primary" onclick="addProblem()"> Submit </a>
+        &nbsp;
+        <a href="problem_id/problem_preview.html" class="btn btn-outline-primary" onclick="preview()"> Preview </a>
+    
+    </div>
+    
+
+    <script src="js/addProblem.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.9/ace.js"></script>
   </body>
 </html>
