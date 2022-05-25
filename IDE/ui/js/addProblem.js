@@ -1,4 +1,4 @@
-let problemCnt=1;
+
 
 function addProblem() {
 
@@ -8,8 +8,7 @@ function addProblem() {
 
         method: "POST",
 
-        data: {
-            problemID: problemCnt,
+        data: { 
             title: document.getElementById("title").value,
             description: document.getElementById("description").value,
             input: document.getElementById("input").value,
@@ -18,7 +17,6 @@ function addProblem() {
         },
 
         success: async function(response) {
-            problemCnt++;
             console.log(response);
         }
     })
@@ -33,7 +31,6 @@ function preview() {
         method: "POST",
 
         data: {
-            problemID: problemCnt,
             title: document.getElementById("title").value,
             description: document.getElementById("description").value,
             input: document.getElementById("input").value,
@@ -50,3 +47,4 @@ function preview() {
 async function loadFile(file) {
     formData = await file.text();
 }
+

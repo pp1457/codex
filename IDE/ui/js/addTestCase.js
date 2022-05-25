@@ -2,8 +2,6 @@ let formData;
 
 function addTestCase() {
 
-    console.log("HI hi");
-
     console.log(formData);
 
     $.ajax({
