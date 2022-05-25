@@ -64,11 +64,11 @@ function saveCode() {
 
         success: async function(response) {
             const ipfs = await window.IpfsCore.create({repo: 'ok' + Math.random()});
-            const {cid} = await ipfs.add(editor.getSession().getValue());
+            const {path} = await ipfs.add(editor.getSession().getValue());
             document.getElementById("output").innerHTML = response;
             document.getElementById("time").innerHTML = getRandomInt(1,1000)
             document.getElementById("memory").innerHTML = getRandomInt(200,30000);
-            console.log(cid);
+            console.log(path);
         }
     })
 }
