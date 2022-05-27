@@ -1,15 +1,5 @@
 *{margin: 0;}
 
-.header {
-    background: #57a958;
-    text-align: left;
-    font-size: 20px;
-    font-weight: bold;
-    color: white;
-    padding: 4px;
-    font-family: sans-serif;
-}
-
 .control-panel {
     background: lightgray;
     text-align: right;
@@ -43,4 +33,18 @@
         width: 99%;
         resize: none;
 
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
+nav {
+    width: 100%;
+    height: 100px;
+    background: -webkit-linear-gradient(#3f9a15, #388813, #3f9a15, #388813, #3f9a15);
+    background: -o-linear-gradient(#3f9a15, #388813, #3f9a15, #388813, #3f9a15);
+    background: linear-gradient(#3f9a15, #388813, #3f9a15, #388813, #3f9a15);
+    border-radius: 6px !important;
+    -moz-border-radius: 6px !important;
 }
