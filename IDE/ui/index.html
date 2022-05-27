@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>test.oj</title>
+    <link rel="stylesheet" href="css/style.css">
     <!-- Font Awesome -->
     <link
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
@@ -22,7 +23,6 @@
     rel="stylesheet"
     />
     <link rel="stylesheet" href="css/index.css">
-    <link rel="stylesheet" href="css/style.css">
     <!-- MDB -->
     <script
     type="text/javascript"
@@ -32,6 +32,8 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js"
+        type="application/javascript"></script>
     <style>
         .bd-placeholder-img {
           font-size: 1.125rem;
@@ -88,12 +90,12 @@
       <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/cover/">
   </head>
     
-  <body class="light-theme" style="border-width:0px; padding: 5px 20px;max-width:1100px; margin:auto;">
+  <body class="light-theme" style="border-width:0px; padding: 5px 20px;width:1100px; margin:0 auto;">
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     
     <div class="container">
-    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom" style=" margin:0;" >
       <a href="index.html" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
         <!--
         <svg class="bi" width="32" height="32" fill="currentColor">
@@ -116,7 +118,7 @@
           </div>
         </li>
         <li class="nav-item"><a href="submit.html" class="nav-link">Submit To Problem</a></li>
-        <li class="nav-item"><a href="user.html" class="nav-link">User</a></li> 
+        <li class="nav-item"><a onclick="toggleButton()"class="nav-link" id="userPage"><span id="User">&ensp;&ensp;&ensp;&ensp;&ensp;&thinsp;</a></li> 
       </ul>
     </header>
     </div>
@@ -263,6 +265,6 @@
           <p>© 2017–2022 Company, Inc. · <a href="#">Privacy</a> · <a href="#">Terms</a></p>
         </footer>
       </main>
-   
+      <script src="js/user.js"></script>
   </body>
 </html>
