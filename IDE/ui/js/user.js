@@ -1,7 +1,7 @@
 window.addEventListener('load', function() { 
     if (!window.ethereum) {
         alert('MetaMask is not installed');
-        document.getElementById("User").innerText="Login";
+        document.getElementById("User").innerText="Log In";
         return false
       }
     checkConnection();
@@ -25,7 +25,7 @@ function handleAccountsChanged(accounts) {
     console.log(accounts);
 
     if (accounts.length === 0) {
-        document.getElementById("User").innerText="Login";
+        document.getElementById("User").innerText="Log In";
     } else{
         document.getElementById("User").innerText="Users";
         document.getElementById("userPage").href="user.html";
