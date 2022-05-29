@@ -19,10 +19,6 @@ window.onload = async function() {
     editor.session.setMode("ace/mode/c_cpp");
 }
 
-const signer = provider.getSigner(account);
-const testOJ = new ethers.Contract(address,ABI,provider);
-const testOJ_rw = new ethers.Contract(address,ABI,signer);
-
 function changeLanguage() {
 
     let language = $("#languages").val();
@@ -65,27 +61,34 @@ function executeCode() {
 
 function saveCode() {
 
-    $.ajax({
+    if(String(account).length<10){
+        alert('Please log in with Metamask to upload your submission');
+    }
+    else{
+        $.ajax({
 
-        url: "/app/compiler.php",
-
-        method: "POST",
-
-        data: {
-            language: $("#languages").val(),
-            code: editor.getSession().getValue(),
-            problemID: document.getElementById("problemId").value,
-        },
-
-        success: async function(response) {
-            const ipfs = await window.IpfsCore.create({repo: 'ok' + Math.random()});
-            const {path} = await ipfs.add(editor.getSession().getValue());
-            var subID=123,subPrice=456;
-            document.getElementById("output").innerHTML = response;
-            document.getElementById("time").innerHTML = getRandomInt(1,1000)
-            document.getElementById("memory").innerHTML = getRandomInt(200,30000);
-            console.log(path);
-            await testOJ_rw.add_sub(account,subID,subPrice,path);
-        }
-    })
+            url: "/app/compiler.php",
+    
+            method: "POST",
+    
+            data: {
+                language: $("#languages").val(),
+                code: editor.getSession().getValue(),
+                problemID: document.getElementById("problemId").value,
+            },
+    
+            success: async function(response) {
+                const ipfs = await window.IpfsCore.create({repo: 'ok' + Math.random()});
+                const {path} = await ipfs.add(editor.getSession().getValue());
+                const signer = provider.getSigner(account);
+                const testOJ_rw = new ethers.Contract(address,ABI,signer);
+                var subID=123,subPrice=456;
+                document.getElementById("output").innerHTML = response;
+                document.getElementById("time").innerHTML = getRandomInt(1,1000)
+                document.getElementById("memory").innerHTML = getRandomInt(200,30000);
+                console.log(path);
+                await testOJ_rw.add_sub(account,subID,subPrice,path);
+            }
+        })
+    }
 }
