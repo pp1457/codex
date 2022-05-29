@@ -9,7 +9,7 @@ window.addEventListener('load', function() {
 
 const userBalance = document.getElementById('userBalance')
 const provider = new ethers.providers.Web3Provider(window.ethereum)
-var account;
+var account="guest";
 const userWallet = document.getElementById('userWallet');
 
 
