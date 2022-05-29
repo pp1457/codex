@@ -15,6 +15,7 @@ contract not_admin
     function send_ether(address _to,string _message)public payable
     {
         require(msg.value>0);
+        require(msg.sender.balance>=msg.value,"Not enough ether to send QQ");
         _to.transfer(msg.value);
         if(copy[_to].value[msg.sender]==0)copy[_to].from.push(msg.sender);
         copy[_to].value[msg.sender]+=msg.value;
@@ -32,7 +33,7 @@ contract not_admin
 
     function buySubmission(address subOwner,uint subID)public returns(string){
         require(exist[subOwner][subID]);
-        require(address(msg.sender).balance>who_owns_what[subOwner][subID].price);
+        require(address(msg.sender).balance>=who_owns_what[subOwner][subID].price);
         subOwner.transfer(who_owns_what[subOwner][subID].price);
         emit Log_buySubmission(msg.sender,subOwner,subID,"buySub");
         return who_owns_what[subOwner][subID].IPFS_address;
