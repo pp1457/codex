@@ -9,9 +9,8 @@ window.addEventListener('load', function() {
 
 const userBalance = document.getElementById('userBalance')
 const provider = new ethers.providers.Web3Provider(window.ethereum)
-const userWallet = document.getElementById('userWallet')
-
-const BeAddress = "";
+var account;
+const userWallet = document.getElementById('userWallet');
 
 
 function checkConnection() {
@@ -21,14 +20,18 @@ function checkConnection() {
         .catch(console.error);
 }
 
-function handleAccountsChanged(accounts) {
+async function handleAccountsChanged(accounts) {
     console.log(accounts);
-
+    account=accounts[0];
     if (accounts.length === 0) {
         document.getElementById("User").innerText="Log In";
     } else{
         document.getElementById("User").innerText="Users";
         document.getElementById("userPage").href="user.html";
+        var userTokenBalance = await provider.getBalance(accounts[0]);
+        userTokenBalance = ethers.utils.formatEther(userTokenBalance);
+        //userWallet.innerText = accounts[0];
+        //userBalance.innerText = userTokenBalance;
     }
     if(!window.location.hash) {
         window.location = window.location + '#loaded';
@@ -36,47 +39,12 @@ function handleAccountsChanged(accounts) {
     }
 }
 
-
-const BeABI = [
-    "function name() public view returns (string)",
-    "function symbol() public view returns (string)",
-
-    /// @param _owner The address from which the balance will be retrieved
-    /// @return The balance
-    "function balanceOf(address _owner) public view returns (uint256)",
-
-    /// @notice send `_value` token to `_to` from `msg.sender`
-    /// @param _to The address of the recipient
-    /// @param _value The amount of token to be transferred
-    /// @return Whether the transfer was successful or not
-    "function transfer(address _to, uint256 _value) public returns (bool)",
-
-    /// @notice send `_value` token to `_to` from `_from` on the condition it is approved by `_from`
-    /// @param _from The address of the sender
-    /// @param _to The address of the recipient
-    /// @param _value The amount of token to be transferred
-    /// @return Whether the transfer was successful or not
-    "function transferFrom(address _from, address _to, uint256 _value) public returns (bool)",
-
-    /// @notice `msg.sender` approves `_spender` to spend `_value` tokens
-    /// @param _spender The address of the account able to transfer the tokens
-    /// @param _value The amount of tokens to be approved for transfer
-    /// @return Whether the approval was successful or not
-    "function approve(address _spender, uint256 _value) public returns (bool)",
-
-    /// @param _owner The address of the account owning tokens
-    /// @param _spender The address of the account able to transfer the tokens
-    /// @return Amount of remaining tokens allowed to spent
-    "function allowance(address _owner, address _spender) public view returns (uint256)",
-];
-
 function toggleButton() {
   if (!window.ethereum) {
     alert('MetaMask is not installed');
-
+    
     return false
   }
-
   loginWithMetaMask();
 }
 
@@ -95,7 +63,7 @@ async function loginWithMetaMask() {
 
     window.userWalletAddress = accounts[0]
     //userWallet.innerText = window.userWalletAddress;
-   // userBalance.innerText = userTokenBalance;
+    //userBalance.innerText = userTokenBalance;
     connected=true;
     document.getElementById("User").innerText="Users";
     document.getElementById("userPage").href="user.html";
