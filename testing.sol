@@ -31,12 +31,13 @@ contract not_admin
         }
     }
 
-    function buySubmission(address subOwner,uint subID)public returns(string){
-        require(exist[subOwner][subID]);
-        require(address(msg.sender).balance>=who_owns_what[subOwner][subID].price);
-        subOwner.transfer(who_owns_what[subOwner][subID].price);
-        emit Log_buySubmission(msg.sender,subOwner,subID,"buySub");
-        return who_owns_what[subOwner][subID].IPFS_address;
+    function buySubmission(address _owner,uint _id)public returns(string)
+    {
+        require(exist[_owner][_id]);
+        require(address(msg.sender).balance>=who_owns_what[_owner][_id].price);
+        _owner.transfer(who_owns_what[_owner][_id].price);
+        emit Log_buySubmission(msg.sender,_owner,_id,"buySub");
+        return who_owns_what[_owner][_id].IPFS_address;
     }
     //submissions
 
@@ -48,25 +49,12 @@ contract not_admin
         emit LogSubmission(_owner,_id,_price);
     }
 
-    struct Submission{
+    struct Submission
+    {
         string IPFS_address;
         uint price;
     }
     mapping(address=>mapping(uint=>bool)) exist;
     mapping(address=>mapping(uint=>Submission))who_owns_what;
 
-}
-
-contract admin //sample of admin,may not be used in final version
-{
-    address Admin=0x37CA53200171F584E734c94cF82DB2875401757E;
-    modifier ADMIN(address id)
-    {
-        require(id==Admin,"You are not allow to use this function");
-        _;
-    }
-    function Hello_World()ADMIN(msg.sender)public view returns(string)
-    {
-        return "Hello World";
-    }
 }
