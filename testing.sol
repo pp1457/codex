@@ -10,6 +10,8 @@ contract not_admin
     }
     mapping(address=>trans)copy;
     event Log_transaction(address from,address to,uint value,string message);
+    event Log_buySubmission(address buyer,address subOwner,uint subID,string message);
+    event LogSubmission(address owner,uint id,uint price);
     function send_ether(address _to,string _message)public payable
     {
         require(msg.value>0);
@@ -27,14 +29,33 @@ contract not_admin
             emit printtrans(_from,copy[msg.sender].value[_from]);
         }
     }
+
+    function buySubmission(address subOwner,uint subID)public returns(string){
+        require(exist[subOwner][subID]);
+        require(address(msg.sender).balance>who_owns_what[subOwner][subID].price);
+        subOwner.transfer(who_owns_what[subOwner][subID].price);
+        emit Log_buySubmission(msg.sender,subOwner,subID,"buySub");
+        return who_owns_what[subOwner][subID].IPFS_address;
+    }
     //submissions
-    struct submissions
+
+    function add_sub(address _owner,uint _id,uint _price,string _IPFS_address)public
     {
-        string IPFS_address;//we could change it into any other capable forms as if we want to or our skill allows
+        who_owns_what[_owner][_id].IPFS_address=_IPFS_address;
+        who_owns_what[_owner][_id].price=_price;
+        exist[_owner][_id]=true;
+        emit LogSubmission(_owner,_id,_price);
+    }
+
+    struct Submission{
+        string IPFS_address;
         uint price;
     }
-    mapping(address=>submissions[])own_subs;
+    mapping(address=>mapping(uint=>bool)) exist;
+    mapping(address=>mapping(uint=>Submission))who_owns_what;
+
 }
+
 contract admin //sample of admin,may not be used in final version
 {
     address Admin=0x37CA53200171F584E734c94cF82DB2875401757E;
