@@ -38,9 +38,9 @@ contract testOJ
 
     function buySubmission(uint _id)public payable returns(string)
     {
-        require(exist[_id]);
-        require(address(msg.sender).balance>=sub[_id].price * (0.001 ether));
-        sub[_id].owner.transfer(sub[_id].price * (0.001 ether));
+        require(exist[_id],"submission does not exist");
+        require(msg.sender.balance>=sub[_id].price * 0.001 ether,"Not enough ether to send QQ");
+        sub[_id].owner.transfer(sub[_id].price * 0.001 ether);
         emit Log_buySubmission(msg.sender,sub[_id].owner,_id,"buy a Submission");
         return sub[_id].IPFS_address;
     }
