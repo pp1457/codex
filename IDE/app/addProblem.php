@@ -33,7 +33,31 @@
     fwrite($problemIdFile, $problemID);
     fclose($problemIdFile);
 
-    echo "add new Problem!!!";
+    // add elements in problems.html
+    $problemID--;
+
+    $u = fopen("problemListTemplate/upper.txt","r");
+    $t = fopen("problemListTemplate/tmpl.txt","r");
+    $l = fopen("problemListTemplate/lower.txt","r"); 
+    $upper = fread($u,filesize("problemListTemplate/upper.txt"));
+    $tmpl  = fread($t,filesize("problemListTemplate/tmpl.txt"));
+    $lower = fread($l,filesize("problemListTemplate/lower.txt"));
+    
+    $tmpl = str_replace("{PID}",$problemID,$tmpl);
+    $tmpl = str_replace("{TITLE}",$title,$tmpl);
+    $tmpl = str_replace("{AUTHOR}",$author,$tmpl);
+    $upper = $upper . "\n" . $tmpl;
+    $result = $upper . "\n" . $lower;
+
+    fclose($u); fclose($t); fclose($l);
+
+    $u = fopen("problemListTemplate/upper.txt","w");
+    $h = fopen("../ui/problems.html","w");
+    fwrite($u,$upper); 
+    fwrite($h,$result);
+    fclose($u); fclose($h);
+
+    echo "add new Problem!!!" . $problemID . " author = " . $author;
 
     /*
     if($language == "c") {
