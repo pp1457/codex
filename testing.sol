@@ -36,7 +36,7 @@ contract testOJ
         }
     }
 
-    function buySubmission(uint _id)public returns(string)
+    function buySubmission(uint _id)public payable returns(string)
     {
         require(exist[_id]);
         require(address(msg.sender).balance>=sub[_id].price);
