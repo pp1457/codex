@@ -14,6 +14,7 @@ function addProblem() {
             input: document.getElementById("input").value,
             output: document.getElementById("output").value,
             scoring: document.getElementById("scoring").value,
+            author: account,
         },
 
         success: async function(response) {
