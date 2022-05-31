@@ -11,11 +11,13 @@ contract testOJ
     mapping(address=>trans)copy;
     event Log_transaction(address from,address to,uint value,string message);
     event Log_buySubmission(address buyer,address subOwner,uint subID,string message);
-    event Log_Submission(address owner,uint id,uint price);
+    event Log_Submission(address owner,uint id,uint256 price);
     event Log_printtrans(address from,uint value);
 
     mapping(uint=>bool) exist;
     mapping(uint=>Submission) sub;
+
+    function() public payable {}
 
     function send_ether(address _to,string _message)public payable
     {
@@ -36,17 +38,17 @@ contract testOJ
         }
     }
 
-    function buySubmission(uint _id)public payable returns(string)
+    function buySubmission(uint _id)public returns(string)
     {
         require(exist[_id],"submission does not exist");
-        require(msg.sender.balance>=sub[_id].price ,"Not enough ether to send QQ");
-        sub[_id].owner.transfer(sub[_id].price * 1 wei);
+        require(address(msg.sender).balance>=sub[_id].price * 1e15 ,"Not enough ether to send QQ");
+        address(sub[_id].owner).transfer(sub[_id].price * 1e15 wei);
         emit Log_buySubmission(msg.sender,sub[_id].owner,_id,"buy a Submission");
         return sub[_id].IPFS_address;
     }
     //submissions
 
-    function add_sub(address _owner,uint _id,uint _price,string _IPFS_address)public
+    function add_sub(address _owner,uint _id,uint256 _price,string _IPFS_address)public
     {
         require(!exist[_id]);
         sub[_id].IPFS_address=_IPFS_address;
@@ -60,7 +62,7 @@ contract testOJ
     {
         address owner;
         string IPFS_address;
-        uint price;
+        uint256 price;
     }
 
 }
