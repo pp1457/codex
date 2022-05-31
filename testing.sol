@@ -1,6 +1,7 @@
 pragma solidity ^0.4.25;
 contract testOJ
 //contract for everyone,functions like transactions,save submissions and buy submissions are required
+//address : 0x5125c278aab968e90c80370d1db8c188fda1faf9
 {
     //transactions
     struct trans
