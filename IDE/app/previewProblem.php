@@ -9,14 +9,21 @@
     $problemID=(int)fread($pIdFile,filesize("problemCnt.txt"));
     fclose($pIdFile);
 
-    $template = fopen("problems/template/all.txt","r");
-    $content=fread($template,filesize("problems/template/all.txt"));
-    $content=str_replace("{title}",$problemID . " . " . $title,$content);
-    $content=str_replace("{description}",$description,$content);
-    $content=str_replace("{input}",$input,$content);
-    $content=str_replace("{output}",$output,$content);
-    $content=str_replace("{scoring}",$scoring,$content);
-    fclose($template);
+    $tUpper = fopen("problems/template/upper.txt","r");
+    $upContent=fread($tUpper,filesize("problems/template/upper.txt"));
+
+    $upContent=str_replace("{title}",$problemID . " . " . $title,$upContent);
+    $upContent=str_replace("{description}",$description,$upContent);
+    $upContent=str_replace("{input}",$input,$upContent);
+    $upContent=str_replace("{output}",$output,$upContent);
+    $upContent=str_replace("{scoring}",$scoring,$upContent);
+    fclose($tUpper);
+
+    $tLower = fopen("problems/template/lower.txt","r");
+    $lowContent=fread($tLower,filesize("problems/template/lower.txt"));
+    fclose($tLower);
+
+    $content = $upContent . $lowContent; 
 
     $filePath = "../ui/problem_id/" . "problem_preview.html";
     $programFile = fopen($filePath, "w");
