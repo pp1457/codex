@@ -4,6 +4,7 @@
     $input = $_POST['input'];
     $output = $_POST['output'];
     $scoring = $_POST['scoring'];
+    $author = $_POST['author'];
 
     $pIdFile = fopen("problemCnt.txt","r");
     $problemID=(int)fread($pIdFile,filesize("problemCnt.txt"));
