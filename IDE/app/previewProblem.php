@@ -6,11 +6,11 @@
     $scoring = $_POST['scoring'];
 
     $pIdFile = fopen("problemCnt.txt","r");
-    $problemID=(int)fread($pIdFile,filesize("../ui/problem_id/problemTemplate.html"));
+    $problemID=(int)fread($pIdFile,filesize("problemCnt.txt"));
     fclose($pIdFile);
 
-    $template = fopen("../ui/problem_id/problemTemplate.html","r");
-    $content=fread($template,filesize("../ui/problem_id/problemTemplate.html"));
+    $template = fopen("problems/template/all.txt","r");
+    $content=fread($template,filesize("problems/template/all.txt"));
     $content=str_replace("{title}",$problemID . " . " . $title,$content);
     $content=str_replace("{description}",$description,$content);
     $content=str_replace("{input}",$input,$content);
@@ -18,7 +18,7 @@
     $content=str_replace("{scoring}",$scoring,$content);
     fclose($template);
 
-    $filePath = "../ui/problem_id/" . "problem_preview" . ".html";
+    $filePath = "../ui/problem_id/" . "problem_preview.html";
     $programFile = fopen($filePath, "w");
     fwrite($programFile, $content);
     fclose($programFile);

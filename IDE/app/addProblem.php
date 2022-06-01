@@ -6,17 +6,24 @@
     $scoring = $_POST['scoring'];
 
     $pIdFile = fopen("problemCnt.txt","r");
-    $problemID=(int)fread($pIdFile,filesize("../ui/problem_id/problemTemplate.html"));
+    $problemID=(int)fread($pIdFile,filesize("problemCnt.txt"));
     fclose($pIdFile);
 
-    $template = fopen("../ui/problem_id/problemTemplate.html","r");
-    $content=fread($template,filesize("../ui/problem_id/problemTemplate.html"));
-    $content=str_replace("{title}",$problemID . " . " . $title,$content);
-    $content=str_replace("{description}",$description,$content);
-    $content=str_replace("{input}",$input,$content);
-    $content=str_replace("{output}",$output,$content);
-    $content=str_replace("{scoring}",$scoring,$content);
-    fclose($template);
+    $tUpper = fopen("problems/template/upper.txt","r");
+    $upContent=fread($tUpper,filesize("problems/template/upper.txt"));
+
+    $upContent=str_replace("{title}",$problemID . " . " . $title,$upContent);
+    $upContent=str_replace("{description}",$description,$upContent);
+    $upContent=str_replace("{input}",$input,$upContent);
+    $upContent=str_replace("{output}",$output,$upContent);
+    $upContent=str_replace("{scoring}",$scoring,$upContent);
+    fclose($tUpper);
+
+    $tLower = fopen("problems/template/lower.txt","r");
+    $lowContent=fread($tLower,filesize("problems/template/lower.txt"));
+    fclose($tLower);
+
+    $content = $upContent . $lowContent; 
 
     $filePath = "../ui/problem_id/" . "problem_". $problemID . ".html";
     $programFile = fopen($filePath, "w");
@@ -27,6 +34,20 @@
     $programFile2 = fopen($filePath2, "w");
     fwrite($programFile2, $content);
     fclose($programFile2);
+
+    if (!file_exists("problems/" . $problemID)) {
+        mkdir("problems/" . $problemID, 0777, true);
+    }
+    $upFilePath = "problems/" . $problemID . "/upper.txt";
+    $upFile = fopen($upFilePath, "w");
+    fwrite($upFile, $upContent);
+    fclose($upFile);
+
+    $subCntPath = "problems/" . $problemID . "/subCnt.txt";
+    $subCntFile = fopen($subCntPath, "w");
+    fwrite($subCntFile, 1);
+    fclose($subCntFile);
+
 
     $problemID++;
     $problemIdFile = fopen("problemCnt.txt","w");
