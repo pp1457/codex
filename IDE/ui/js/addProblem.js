@@ -1,5 +1,3 @@
-
-
 function addProblem() {
 
     $.ajax({
@@ -48,4 +46,3 @@ function preview() {
 async function loadFile(file) {
     formData = await file.text();
 }
-

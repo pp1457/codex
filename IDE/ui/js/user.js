@@ -21,13 +21,13 @@ function checkConnection() {
 }
 
 async function handleAccountsChanged(accounts) {
-    console.log(accounts);
     account=accounts[0];
     if (accounts.length === 0) {
         document.getElementById("User").innerText="Log In";
     } else{
+        console.log(account);
         document.getElementById("User").innerText="Users";
-        document.getElementById("userPage").href="user.html";
+        document.getElementById("userPage").href="users/" + account +".html";
         var userTokenBalance = await provider.getBalance(accounts[0]);
         userTokenBalance = ethers.utils.formatEther(userTokenBalance);
         //userWallet.innerText = accounts[0];
@@ -45,7 +45,27 @@ function toggleButton() {
     
     return false
   }
-  loginWithMetaMask();
+  if(String(account).length<10 )loginWithMetaMask();
+  else{
+    console.log("hi hi");
+    $.ajax({
+
+      url: "/app/checkUser.php",
+  
+      method: "POST",
+  
+      data: {
+        Account: account,
+      },
+  
+      success: async function(response) {
+        document.getElementById("userPage").href=response;
+        console.log(response);
+        console.log("hahaha");
+      }
+    })
+  }
+
 }
 
 async function loginWithMetaMask() {
@@ -61,17 +81,17 @@ async function loginWithMetaMask() {
     //Note that userTokenBalance is not a number and it is bigNumber
     console.log(userTokenBalance);
 
-    window.userWalletAddress = accounts[0]
+    window.userWalletAddress = accounts[0];
+    account = accounts[0];
     //userWallet.innerText = window.userWalletAddress;
     //userBalance.innerText = userTokenBalance;
     connected=true;
     document.getElementById("User").innerText="Users";
-    document.getElementById("userPage").href="user.html";
     window.location.reload();
 }
 
 function signOutOfMetaMask() {
-  window.userWalletAddress = null
+  window.userWalletAddress = "";
   userWallet.innerText = ''
   userBalance.innerText = ''
   loginButton.innerText = 'Sign in with MetaMask'

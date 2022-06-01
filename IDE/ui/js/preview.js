@@ -1,3 +1,12 @@
+const ABI = [
+  "function buySubmission(uint _id)public payable returns(string)",
+  "function add_sub(address _owner,uint _id,uint _price,string _IPFS_address)public",
+  "event Log_buySubmission(address buyer,address subOwner,uint subID,string message)",
+  "event Log_Submission(address owner,uint id,uint256 price)",
+];
+
+const address = "0x5125c278aab968e90c80370d1db8c188fda1faf9";
+
 window.addEventListener('load', function() { 
     if (!window.ethereum) {
         alert('MetaMask is not installed');
@@ -7,10 +16,9 @@ window.addEventListener('load', function() {
     checkConnection();
  });
 
-const userBalance = document.getElementById('userBalance')
 const provider = new ethers.providers.Web3Provider(window.ethereum)
-const userWallet = document.getElementById('userWallet')
 var account="guest";
+
 
 
 function checkConnection() {
@@ -27,7 +35,7 @@ function handleAccountsChanged(accounts) {
         document.getElementById("User").innerText="Log In";
     } else{
         document.getElementById("User").innerText="Users";
-        document.getElementById("userPage").href="../user.html";
+        document.getElementById("userPage").href="../users/" + account + ".html";
     }
     if(!window.location.hash) {
         window.location = window.location + '#loaded';
@@ -41,8 +49,26 @@ function toggleButton() {
 
     return false
   }
+  if(String(account).length<10 )loginWithMetaMask();
+  else{
+    console.log("hi hi");
+    $.ajax({
 
-  loginWithMetaMask();
+      url: "/app/checkUser.php",
+  
+      method: "POST",
+  
+      data: {
+        Account: account,
+      },
+  
+      success: async function(response) {
+        document.getElementById("userPage").href="../" + response;
+        console.log(response);
+        console.log("hahaha");
+      }
+    })
+  }
 }
 
 async function loginWithMetaMask() {
@@ -63,20 +89,32 @@ async function loginWithMetaMask() {
    // userBalance.innerText = userTokenBalance;
     connected=true;
     document.getElementById("User").innerText="Users";
-    document.getElementById("userPage").href="../user.html";
     window.location.reload();
 }
 
 function signOutOfMetaMask() {
-  window.userWalletAddress = null
-  userWallet.innerText = ''
-  userBalance.innerText = ''
+  window.userWalletAddress = "";
+  //userWallet.innerText = ''
+  //userBalance.innerText = ''
   loginButton.innerText = 'Sign in with MetaMask'
 
   loginButton.removeEventListener('click', signOutOfMetaMask)
   setTimeout(() => {
     loginButton.addEventListener('click', loginWithMetaMask)
   }, 200)
+}
+
+async function buySub(subID){
+  if(String(account).length<10){
+    alert("Please log in with Metamask to buy other's submission");
+  }
+  else{
+    console.log("subID = ",subID);
+    const signer = provider.getSigner(account);
+    const testOJ_rw = new ethers.Contract(address,ABI,signer);
+    var subId=parseInt(subID);
+    const path=await testOJ_rw.buySubmission(subId);
+  }
 }
 
 
