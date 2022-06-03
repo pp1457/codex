@@ -23,7 +23,7 @@
     $lowContent=fread($tLower,filesize("problems/template/lower.txt"));
     fclose($tLower);
 
-    $content = $upContent . $lowContent; 
+    $content = $upContent . "\n" . $lowContent; 
 
     $filePath = "../ui/problem_id/" . "problem_preview.html";
     $programFile = fopen($filePath, "w");

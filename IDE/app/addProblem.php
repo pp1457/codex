@@ -24,7 +24,7 @@
     $lowContent=fread($tLower,filesize("problems/template/lower.txt"));
     fclose($tLower);
 
-    $content = $upContent . $lowContent; 
+    $content = $upContent . "\n" . $lowContent; 
 
     $filePath = "../ui/problem_id/" . "problem_". $problemID . ".html";
     $programFile = fopen($filePath, "w");
@@ -78,6 +78,51 @@
     fwrite($u,$upper); 
     fwrite($h,$result);
     fclose($u); fclose($h);
+
+    $voteCnt = fopen("problems/" . $problemID . "/voteCnt.txt" ,"w");
+    $hadVoted = fopen("problems/" . $problemID . "/hadVoted.txt", "w");
+    fwrite($voteCnt,0);
+    fwrite($hadVoted,"hello");
+    fclose($voteCnt);
+    fclose($hadVoted);
+
+    // user
+    $userProCntFile=fopen("users/" . $author . "/proCnt.txt","r");
+    $userProID=(int)fread( $userProCntFile,filesize("users/" . $author . "/proCnt.txt"));
+    fclose($userProCntFile);
+
+    $userFile_1 = fopen("users/" . $author . "/1.txt" ,"r");
+    $userFile_2 = fopen("users/" . $author . "/2.txt" ,"r");
+    $userFile_3 = fopen("users/" . $author . "/3.txt" ,"r");
+    $proFile = fopen("users/template/pro.txt" , "r");
+    $pro = fread($proFile,filesize("users/template/pro.txt"));
+    $_1 = fread($userFile_1 , filesize("users/" . $author . "/1.txt"));
+    $_2 = fread($userFile_2 , filesize("users/" . $author . "/2.txt"));
+    $_3 = fread($userFile_3 , filesize("users/" . $author . "/3.txt"));
+    fclose($proFile);
+    fclose($userFile_1);
+    fclose($userFile_2);
+    fclose($userFile_3);
+
+    $pro = str_replace("{proCnt}" , $userProID , $pro);
+    $pro = str_replace("{proID}" , $problemID , $pro);
+    $pro = str_replace("{proLink}" , "../problem_id/problem_" . $problemID . ".html" , $pro);
+    $pro = str_replace("{title}" , $title , $pro);
+    
+    $_2 = $_2 . "\n" . $pro;
+
+    $newUser = $_1  . "\n" . $_2 . "\n" . $_3;
+    $userHTML = fopen("../ui/users/" . $author . ".html" ,"w");
+    fwrite($userHTML,$newUser);
+    fclose($userHTML);
+
+    $userFile_2 = fopen("users/" . $author . "/2.txt" ,"w");
+    fwrite($userFile_2,$_2);
+    fclose($userFile_2);
+
+    $userProCntFile=fopen("users/" . $author . "/proCnt.txt","w");
+    fwrite($userProCntFile,($userProID+1));
+    fclose($userProCntFile);
 
     echo "add new Problem!!!" . $problemID . " author = " . $author;
 

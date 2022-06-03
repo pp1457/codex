@@ -28,6 +28,14 @@
         $_3New=fopen("users/" . $account . "/3.txt","w");
         fwrite($_3New,$_3);
         fclose($_3New);
+
+        $userSubCnt=fopen("users/" . $account . "/subCnt.txt","w");
+        fwrite($userSubCnt,1);
+        fclose($userSubCnt); 
+
+        $userProCnt=fopen("users/" . $account . "/proCnt.txt","w");
+        fwrite($userProCnt,1);
+        fclose($userProCnt); 
     }
     if(!file_exists("../ui/users/" . $account . ".html")){
         $userFile=fopen("../ui/users/" . $account . ".html","w");
