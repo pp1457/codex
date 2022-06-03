@@ -24,6 +24,7 @@
     rel="stylesheet"
     />
     <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/pro.css">
     <!-- MDB -->
     <script
     type="text/javascript"
@@ -125,21 +126,22 @@
     </div>
     
     <main style="word-spacing:5px;">
-        <section class="py-5 text-center container">
-            <div class="row py-lg-1">
-              <div class="col-lg-6 col-md-8 mx-auto">
-                <h1 class="pb-2 border-bottom">0 . Test Problem</h1>
-              </div>
-            </div>
-            
-          </section>
+      <section class="py-5 text-center container">
+        <div class="row py-lg-1">
+          <div class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="pb-2 border-bottom">0 . test problem</h1>
+          </div>
+        </div>
+        
+      </section>
+
 
           <br>
           <div class="col-lg-10 mx-auto">
             <h3 class="pb-2 border-bottom">Description</h3>
             <br>
          
-            <h5 class="fw-light"></h5>
+            <h5 class="fw-light">test problem</h5>
           </div>
 
           <br><br><br>
@@ -148,7 +150,7 @@
             <h3 class="pb-2 border-bottom">Input</h3>
             <br>
          
-            <h5 class="fw-light"></h5>
+            <h5 class="fw-light">test problem</h5>
           </div>
 
           <br><br><br>
@@ -157,7 +159,7 @@
             <h3 class="pb-2 border-bottom">Output</h3>
             <br>
          
-            <h5 class="fw-light"></h5>
+            <h5 class="fw-light">test problem</h5>
           </div>
 
           <br><br><br>
@@ -166,12 +168,23 @@
             <h3 class="pb-2 border-bottom">Scoring</h3>
             <br>
          
-            <h5 class="fw-light"></h5>
+            <h5 class="fw-light">test problem</h5>
           </div>
 
       </main>
 
-      <br><br><br><br><br><br>
+      <br><br><br><br>
+
+      <div class="col-lg-2 col-md-8 mx-auto">
+        <div class="vote circle" >
+          <div class="increment up"></div>
+          <div class="increment down"></div>
+          <div class="count">0</div>
+        </div>
+      </div>
+      
+
+      <br><br><br><br>
 
       <table class="table">
         <thead>
@@ -185,12 +198,40 @@
           </tr>
         </thead>
         <tbody>
-
+          <tr>
+            <th scope="row">1</th>
+            <td>0xc8f1f4f9ed658003c698781e8878ab69a1347aaf</td>
+            <td>1</td>
+            <td>100</td>
+            <td>654</td>
+            <td>{sold}</td>
+            <td><button class="btn btn-outline-primary btn-sm" id=1 onclick="buySub(this.id)">Buy!</td>
+          </tr>
         </tbody>
       </table>
       
       <br><br><br><br>
+
+      <!-- Modal -->
+      <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">You bought a submission!</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              You can view the submission at the address below
+              <a id="ipfsPath"></a><span id="path"></span></a>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
       <script src="../js/preview.js"></script>
+      <script src="../js/pro.js"></script>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.9/ace.js"></script>
   </body>
