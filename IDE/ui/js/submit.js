@@ -52,7 +52,8 @@ function executeCode() {
         },
 
         success: async function(response) {
-            document.getElementById("output").innerHTML = response;
+            var data = JSON.parse(response);
+            document.getElementById("output").innerHTML = data.score;
             document.getElementById("time").innerHTML = getRandomInt(1,1000)
             document.getElementById("memory").innerHTML = getRandomInt(200,30000);
             console.log("hello");
@@ -86,8 +87,9 @@ function saveCode() {
                 const {path} = await ipfs.add(editor.getSession().getValue());
                 const signer = provider.getSigner(account);
                 const testOJ_rw = new ethers.Contract(address,ABI,signer);
-                var subID=0,subPrice=document.getElementById("price").value;
-                document.getElementById("output").innerHTML = response;
+                var data = JSON.parse(response);
+                var subID=data.subID,subPrice=document.getElementById("price").value;
+                document.getElementById("output").innerHTML = data.score;
                 document.getElementById("time").innerHTML = getRandomInt(1,1000)
                 document.getElementById("memory").innerHTML = getRandomInt(200,30000);
                 console.log(path);

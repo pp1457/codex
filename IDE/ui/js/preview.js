@@ -109,12 +109,11 @@ async function buySub(subID){
     alert("Please log in with Metamask to buy other's submission");
   }
   else{
-    /*
     console.log("subID = ",subID);
     const signer = provider.getSigner(account);
     const testOJ_rw = new ethers.Contract(address,ABI,signer);
     var subId=parseInt(subID);
-    const path=await testOJ_rw.buySubmission(subId);*/
+    const path=await testOJ_rw.buySubmission(subId);
   }
 }
 

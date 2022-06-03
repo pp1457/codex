@@ -30,6 +30,22 @@ async function handleAccountsChanged(accounts) {
         document.getElementById("userPage").href="users/" + account +".html";
         var userTokenBalance = await provider.getBalance(accounts[0]);
         userTokenBalance = ethers.utils.formatEther(userTokenBalance);
+        $.ajax({
+
+          url: "/app/checkUser.php",
+      
+          method: "POST",
+      
+          data: {
+            Account: account,
+          },
+      
+          success: async function(response) {
+            document.getElementById("userPage").href=response;
+            console.log(response);
+            console.log("hahaha");
+          }
+        })
         //userWallet.innerText = accounts[0];
         //userBalance.innerText = userTokenBalance;
     }
@@ -43,7 +59,7 @@ function toggleButton() {
   if (!window.ethereum) {
     alert('MetaMask is not installed');
     
-    return false
+    return false;
   }
   if(String(account).length<10 )loginWithMetaMask();
   else{
