@@ -17,6 +17,7 @@ function addProblem() {
 
         success: async function(response) {
             console.log(response);
+            document.getElementById("result").innerText="Submit successful ! You can see your problem in Problem Set."
         }
     })
 }
