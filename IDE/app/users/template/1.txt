@@ -104,6 +104,15 @@
     
     <br><br><br><br>
 
+    <style>
+        a:link {
+          text-decoration: none;
+        }
+        a:visited {
+          text-decoration: none;
+        }
+     </style>
+
     <nav>
       <div class="nav nav-tabs" id="nav-tab" role="tablist">
         <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Your Submissions</button>
@@ -117,9 +126,9 @@
             <tr>
               <th scope="col">#</th>
               <th scope="col">Submission ID</th>
+              <th scope="col">Problem ID</th>
               <th scope="col">Score</th>
               <th scope="col">Price</th>
-              <th scope="col">Sold</th>
             </tr>
           </thead>
           <tbody>

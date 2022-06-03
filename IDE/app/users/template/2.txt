@@ -1,13 +1,13 @@
         </tbody>
         </table>
       </div>
-      <div class="tab-pane " id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+      <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
         <table class="table">
           <thead>
             <tr>
               <th scope="col">#</th>
               <th scope="col">Problem ID</th>
-              <th scope="col">Tried</th>
+              <th scope="col">Title</th>
               <th scope="col">Vote</th>
             </tr>
           </thead>

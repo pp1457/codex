@@ -1,0 +1,6 @@
+            <tr>
+              <th scope="row">{proCnt}</th>
+              <td>{proID}</td>
+              <td><a href="{proLink}">{title}</a></td>
+              <td>{vote}</td>
+            </tr>
