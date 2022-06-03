@@ -114,8 +114,13 @@ async function buySub(subID){
     const testOJ_rw = new ethers.Contract(address,ABI,signer);
     var subId=parseInt(subID);
     const path=await testOJ_rw.buySubmission(subId);
+    const myModal = new bootstrap.Modal(document.getElementById('myModal'));
+    myModal.show();
+    document.getElementById("ipfsPath").innerText="http://ipfs.io/ipfs/" + path;
+    document.getElementById("ipfsPath").href="http://ipfs.io/ipfs/" + path;
   }
 }
+
 
 
 /*$(function() {
