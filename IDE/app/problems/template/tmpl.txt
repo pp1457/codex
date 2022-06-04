@@ -4,6 +4,6 @@
             <td>{subID}</td>
             <td>{score}</td>
             <td>{price}</td>
-            <td>{sold}</td>
-            <td><button class="btn btn-outline-primary btn-sm" id={subID} onclick="buySub(this.id)">Buy!</td>
+            <td><button class="btn btn-outline-primary btn-sm" id={subID} onclick="buySub(this.id)">Buy</td>
+            <td><button class="btn btn-outline-primary btn-sm" id={subID} onclick="viewSub(this.id)">Buy!</td>
           </tr>
