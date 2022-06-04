@@ -193,7 +193,6 @@
             <th scope="col">Submission ID</th>
             <th scope="col">Score</th>
             <th scope="col">Price</th>
-            <th scope="col">Sold</th>
           </tr>
         </thead>
         <tbody>
