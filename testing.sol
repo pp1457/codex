@@ -1,7 +1,7 @@
 pragma solidity ^0.4.25;
 contract testOJ
 //contract for everyone,functions like transactions,save submissions and buy submissions are required
-//address : 0x5125c278aab968e90c80370d1db8c188fda1faf9
+// address: 0xece3BEa3f6cfd4A984e82978C7513760C85E69db
 {
     //transactions
     struct trans
@@ -17,6 +17,7 @@ contract testOJ
 
     mapping(uint=>bool) exist;
     mapping(uint=>Submission) sub;
+    mapping(address=>mapping(uint=>bool)) have;
 
     function() public payable {}
 
@@ -42,8 +43,12 @@ contract testOJ
     function buySubmission(uint _id)public returns(string)
     {
         require(exist[_id],"submission does not exist");
+        if(have[msg.sender][_id]){
+            return "Already buy it";
+        }
         require(address(msg.sender).balance>=sub[_id].price * 1e15 ,"Not enough ether to send QQ");
         address(sub[_id].owner).transfer(sub[_id].price * 1e15 wei);
+        have[msg.sender][_id]=true;
         emit Log_buySubmission(msg.sender,sub[_id].owner,_id,"buy a Submission");
         return sub[_id].IPFS_address;
     }
@@ -57,6 +62,11 @@ contract testOJ
         sub[_id].owner=_owner;
         exist[_id]=true;
         emit Log_Submission(_owner,_id,_price);
+    }
+
+    function getHash(uint _id)public view returns(string){
+        require(have[msg.sender][_id],"You don't have access to this submission.");
+        return sub[_id].IPFS_address;
     }
 
     struct Submission
