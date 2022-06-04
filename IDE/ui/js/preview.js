@@ -1,11 +1,12 @@
 const ABI = [
   "function buySubmission(uint _id)public payable returns(string)",
   "function add_sub(address _owner,uint _id,uint _price,string _IPFS_address)public",
+  "function getHash(uint _id)public view returns(string)",
   "event Log_buySubmission(address buyer,address subOwner,uint subID,string message)",
   "event Log_Submission(address owner,uint id,uint256 price)",
 ];
 
-const address = "0x5125c278aab968e90c80370d1db8c188fda1faf9";
+const address = "0xece3BEa3f6cfd4A984e82978C7513760C85E69db";
 
 window.addEventListener('load', function() { 
     if (!window.ethereum) {
@@ -113,14 +114,24 @@ async function buySub(subID){
     const signer = provider.getSigner(account);
     const testOJ_rw = new ethers.Contract(address,ABI,signer);
     var subId=parseInt(subID);
-    const path=await testOJ_rw.buySubmission(subId);
-    const myModal = new bootstrap.Modal(document.getElementById('myModal'));
-    myModal.show();
-    document.getElementById("ipfsPath").innerText="http://ipfs.io/ipfs/" + path;
-    document.getElementById("ipfsPath").href="http://ipfs.io/ipfs/" + path;
+    buy(subId).then(async()=>{
+        const path=await testOJ_rw.getHash(subId);
+        const myModal = new bootstrap.Modal(document.getElementById('myModal'));
+        myModal.show();
+        console.log(path);
+        document.getElementById("ipfsPath").innerText="http://ipfs.io/ipfs/" + path;
+        document.getElementById("ipfsPath").href="http://ipfs.io/ipfs/" + path;
+    })
   }
 }
 
+
+async function buy(subID){
+  const signer = provider.getSigner(account);
+    const testOJ_rw = new ethers.Contract(address,ABI,signer);
+    var subId=parseInt(subID);
+  const result=await testOJ_rw.buySubmission(subId);
+}
 
 
 /*$(function() {

@@ -1,13 +1,12 @@
-let editor;
-
 const ABI = [
     "function buySubmission(uint _id)public payable returns(string)",
     "function add_sub(address _owner,uint _id,uint _price,string _IPFS_address)public",
+    "function getHash(uint _id)public view returns(string)",
     "event Log_buySubmission(address buyer,address subOwner,uint subID,string message)",
     "event Log_Submission(address owner,uint id,uint256 price)",
-];
-
-const address = "0x5125c278aab968e90c80370d1db8c188fda1faf9";
+  ];
+  
+  const address = "0xece3BEa3f6cfd4A984e82978C7513760C85E69db";
 
 window.onload = async function() {
     editor = ace.edit("editor");
@@ -92,8 +91,10 @@ function saveCode() {
                 document.getElementById("output").innerHTML = data.score;
                 document.getElementById("time").innerHTML = getRandomInt(1,1000)
                 document.getElementById("memory").innerHTML = getRandomInt(200,30000);
-                console.log(path);
-                //await testOJ_rw.add_sub(account,subID,subPrice,path);
+                var Path=String(path);
+                console.log(Path);
+                await testOJ_rw.add_sub(account,subID,subPrice,Path);
+                document.getElementById("result").innerText="Submit successful ! You can see your submissoin in User."
             }
         })
     }
