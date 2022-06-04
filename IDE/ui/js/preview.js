@@ -111,27 +111,26 @@ async function buySub(subID){
   }
   else{
     console.log("subID = ",subID);
+    var subId=parseInt(subID);
     const signer = provider.getSigner(account);
     const testOJ_rw = new ethers.Contract(address,ABI,signer);
-    var subId=parseInt(subID);
-    buy(subId).then(async()=>{
-        const path=await testOJ_rw.getHash(subId);
-        const myModal = new bootstrap.Modal(document.getElementById('myModal'));
-        myModal.show();
-        console.log(path);
-        document.getElementById("ipfsPath").innerText="http://ipfs.io/ipfs/" + path;
-        document.getElementById("ipfsPath").href="http://ipfs.io/ipfs/" + path;
-    })
+    await testOJ_rw.buySubmission(subId);
   }
 }
 
-
-async function buy(subID){
+async function viewSub(subID){
+  var subId=parseInt(subID);
   const signer = provider.getSigner(account);
-    const testOJ_rw = new ethers.Contract(address,ABI,signer);
-    var subId=parseInt(subID);
-  const result=await testOJ_rw.buySubmission(subId);
+  const testOJ_rw = new ethers.Contract(address,ABI,signer);
+  const path=await testOJ_rw.getHash(subId);
+  console.log("hi");
+  const myModal = new bootstrap.Modal(document.getElementById('myModal'));
+  myModal.show();
+  console.log(path);
+  document.getElementById("ipfsPath").innerText="http://ipfs.io/ipfs/" + path;
+  document.getElementById("ipfsPath").href="http://ipfs.io/ipfs/" + path;
 }
+
 
 
 /*$(function() {
