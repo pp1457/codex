@@ -21,8 +21,8 @@ $(function(){
       }
     })
     $(".increment").click(function(){
+      if(String(account).length<10) return;
       var Change;
-      let count;
       if($(this).hasClass("up")) {
         Change = 1;
         
