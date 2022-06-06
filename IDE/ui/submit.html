@@ -60,14 +60,7 @@
       <ul class="nav nav-pills">
           <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
           <li class="nav-item"><a href="problems.html" class="nav-link">Problem Set</a></li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">New Problem</a>
-            <div class="dropdown-menu">
-              <a class="dropdown-item" href="uploadProblem.html">Upload Problem</a>
-              <a class="dropdown-item" href="uploadChecker.html">Upload Checker</a>
-              <a class="dropdown-item" href="uploadTestCase.html">Upload Test Case</a>
-            </div>
-          </li>
+          <li class="nav-item"><a href="uploadProblem.html" class="nav-link">New Problem</a></li>
           <li class="nav-item"><a href="submit.html" class="nav-link active" aria-current="page">Submit To Problem</a></li>
           <li class="nav-item"><a class="nav-link" onclick="toggleButton()"  id="userPage" ><span id="User">Users</a></li> 
       </ul>
@@ -120,6 +113,13 @@
           </tr>
         </tbody>
       </table>
+
+      <br><br><br>
+
+      <div>
+        <span id="result"></span>
+      </div>
+
     <script src="js/user.js"></script>
     <script src="js/submit.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

@@ -108,14 +108,7 @@
       <ul class="nav nav-pills">
         <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
         <li class="nav-item"><a href="problems.html" class="nav-link">Problem Set</a></li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle  active" aria-current="page" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">New Problem</a>
-          <div class="dropdown-menu">
-            <a class="dropdown-item" href="uploadProblem.html">Upload Problem</a>
-            <a class="dropdown-item" href="uploadChecker.html">Upload Checker</a>
-            <a class="dropdown-item" href="uploadTestCase.html">Upload Test Case</a>
-          </div>
-        </li>
+        <li class="nav-item"><a href="uploadProblem.html" class="nav-link active" aria-current="page">New Problem</a></li>
         <li class="nav-item"><a href="submit.html" class="nav-link">Submit To Problem</a></li>
         <li class="nav-item"><a class="nav-link" onclick="toggleButton()"  id="userPage" ><span id="User">Users</a></li> 
       </ul>
@@ -125,6 +118,8 @@
     
     <!-- this is what a comment in html looks like -->
     <main>
+        <h4>Statement</h4>
+        <br>
         <div class="mb-3">
             <label for="exampleFormControlInput1" class="form-label">Title</label>
             <input class="form-control" id="title" placeholder="Watermelon">
@@ -145,14 +140,40 @@
             <label for="exampleFormControlTextarea1" class="form-label">Scoring</label>
             <textarea class="form-control" id="scoring" rows="3" placeholder="If your answer is correct , your score will be 100. Otherwise you will get 0."></textarea>
           </div>
-      </main>
-      <br>
-      <div>
+          <a href="problem_id/problem_preview.html" class="btn btn-outline-primary" onclick="preview()"> Preview </a>
+    </main>
     
+    <br><br>
+
+    <h4>Checker</h4>
+    <br>
+
+    <div class="control-panel">
+        Select Language:
+        &nbsp; &nbsp;
+        <select id="languages" class="languages" onchange="changeLanguage()">
+            <option value="cpp"> C++ </option>
+        </select>
+    </div>
+
+    <div class="editor" id="editor"></div>
+
+    <br><br>
+
+    <h4>Test Case</h4>
+    <br>
+
+    <div class="mb-3">
+      &nbsp 
+      <label for="formFile" class="form-label">Please Choose Test Case File</label>
+      &nbsp 
+      <input class="form-control" type="file"  onchange="loadFile(this.files[0])">
+    </div>
+
+    <br><br>
+
+    <div>
         <a class="btn btn-outline-primary" onclick="addProblem()"> Submit </a>
-        &nbsp;
-        <a href="problem_id/problem_preview.html" class="btn btn-outline-primary" onclick="preview()"> Preview </a>
-    
     </div>
 
     <br><br><br>
@@ -160,6 +181,8 @@
     <div>
       <span id="result"></span>
     </div>
+
+    <br><br>
     
     <script src="js/user.js"></script>
     <script src="js/addProblem.js"></script>
