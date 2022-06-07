@@ -8,26 +8,33 @@
     $score;
     $subID;
 
-    $random = "always";
-    $filePath = "temp/" . $random . "." . $language;
+    $filePath = "temp/always." . $language;
     $programFile = fopen($filePath, "w");
     fwrite($programFile, $code);
     fclose($programFile);
 
     if($language == "cpp") {
-        $outputExe = $random . ".exe";
+        $inputFile = fopen("testCase/" . $problemID . ".txt", "r");
+        $input = fread($inputFile,filesize("testCase/" . $problemID . ".txt"));
+        fclose($inputFile);
+        $tmpInput = fopen("temp/in.txt","w");
+        fwrite($tmpInput, $input);
+        fclose($tmpInput);
+
+        $outputExe = "always.exe";
         shell_exec("g++ $filePath -o $outputExe");
-        $output = shell_exec(__DIR__ . "//$outputExe < testCase//$problemID.txt ");
-        $outputFile = fopen("temp/tmp.txt", "w");
-        fwrite($outputFile, $output);
-        fclose($outputFile);
+        shell_exec(__DIR__ . "//$outputExe");
+
+        $programFile = fopen($filePath, "w");
+        fwrite($programFile, "");
+        fclose($programFile);
 
         $checkerFilePath = "checker/" . $problemID . "." . $language;
 
 
         $checkerExe = "tmp.exe";
         shell_exec("g++ $checkerFilePath -o $checkerExe");
-        $score = shell_exec(__DIR__ . "//$checkerExe < temp/tmp.txt ");
+        $score = shell_exec(__DIR__ . "//$checkerExe");
     }
 
     if($save==1){
