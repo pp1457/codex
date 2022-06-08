@@ -10,6 +10,31 @@
     $problemID=(int)fread($pIdFile,filesize("problemCnt.txt"));
     fclose($pIdFile);
 
+    // checker
+
+    $language = strtolower($_POST['language']);
+    $code = $_POST['code'];
+
+    $filePath = "checker/" . $problemID . "." . $language;
+    $programFile = fopen($filePath, "w");
+    fwrite($programFile, $code);
+    fclose($programFile);
+
+    // testcase
+
+    $file = $_POST['file'];
+
+    $random = "always";
+    $filePath = "testCase/" . $problemID . "." . "txt";
+    if(file_exists($filePath)){
+        echo "This problem already had test case, sorry";
+    }
+    else{
+        $programFile = fopen($filePath, "w");
+        fwrite($programFile, $file);
+        fclose($programFile);
+    }
+
     $tUpper = fopen("problems/template/upper.txt","r");
     $upContent=fread($tUpper,filesize("problems/template/upper.txt"));
 
