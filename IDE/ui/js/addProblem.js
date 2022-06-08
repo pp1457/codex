@@ -1,3 +1,5 @@
+let formdata;
+
 function addProblem() {
 
     $.ajax({
@@ -12,7 +14,10 @@ function addProblem() {
             input: document.getElementById("input").value,
             output: document.getElementById("output").value,
             scoring: document.getElementById("scoring").value,
+            language: $("#languages").val(),
+            code: editor.getSession().getValue(),
             author: account,
+            file: formData,
         },
 
         success: async function(response) {
